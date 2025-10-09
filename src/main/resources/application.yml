@@ -14,6 +14,11 @@ spring:
     url: jdbc:mysql://localhost:3307/rin_picture
     username: root
     password: root
+  profiles:
+    active: local
+  servlet:
+    multipart:
+      max-file-size: 10MB
 mybatis-plus:
   configuration:
     # MyBatis 配置
