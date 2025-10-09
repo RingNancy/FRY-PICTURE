@@ -199,8 +199,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         final String SALT = "rin";
         return DigestUtils.md5DigestAsHex((SALT + userPassword).getBytes());
     }
-
-
 }
 
 

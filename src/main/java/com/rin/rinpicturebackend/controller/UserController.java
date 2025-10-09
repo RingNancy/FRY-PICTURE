@@ -1,7 +1,6 @@
 package com.rin.rinpicturebackend.controller;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.http.server.HttpServerRequest;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.rin.rinpicturebackend.annotation.AuthCheck;
 import com.rin.rinpicturebackend.common.BaseResponse;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -145,6 +145,26 @@ public class UserController {
         }
         User user = new User();
         BeanUtil.copyProperties(userUpdateRequest, user);
+        user.setUpdateTime(new Date());
+        boolean result = userService.updateById(user);
+        ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
+        return ResultUtils.success(true);
+    }
+
+    /**
+     * 用户编辑自己的个人信息接口，只允许寻该基本信息，设计权限功能的修改被禁止
+     *
+     * @param userEditRequest
+     * @return
+     */
+    @PostMapping("/edit")
+    public BaseResponse<Boolean> editUser(@RequestBody UserEditRequest userEditRequest) {
+        if (userEditRequest == null || userEditRequest.getId() == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        User user = new User();
+        BeanUtils.copyProperties(userEditRequest, user);
+        user.setUpdateTime(new Date());
         boolean result = userService.updateById(user);
         ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
         return ResultUtils.success(true);

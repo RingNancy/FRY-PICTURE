@@ -6,13 +6,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @ ClassName UserAddRequest
+ * @ ClassName UserEditRequest
  * @ Description
  * @ Author Rin
- * @ Date 2025/9/28 11:56
+ * @ Date 2025/10/5 19:35
  */
 @Data
-public class UserUpdateRequest implements Serializable {
+public class UserEditRequest implements Serializable {
+
     /**
      * id
      */
@@ -32,11 +33,6 @@ public class UserUpdateRequest implements Serializable {
      * 用户简介
      */
     private String userProfile;
-
-    /**
-     * 用户角色 user, admin
-     */
-    private String userRole;
 
     /**
      * 性别（0-女，1-男，2-保密）
