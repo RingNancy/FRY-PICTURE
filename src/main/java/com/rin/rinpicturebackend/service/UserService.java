@@ -18,6 +18,8 @@ import java.util.List;
 */
 public interface UserService extends IService<User> {
 
+    boolean isAdmin(User user);
+
     /**
      * 用户注册
      * @param userAccount 账号

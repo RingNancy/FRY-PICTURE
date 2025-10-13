@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rin.rinpicturebackend.exception.BusinessException;
 import com.rin.rinpicturebackend.exception.ErrorCode;
+import com.rin.rinpicturebackend.exception.ThrowUtils;
 import com.rin.rinpicturebackend.model.dto.user.UserQueryRequest;
 import com.rin.rinpicturebackend.model.entity.User;
 import com.rin.rinpicturebackend.model.enums.UserRoleEnum;
@@ -38,6 +39,11 @@ import static com.rin.rinpicturebackend.constant.UserConstant.USER_LOGIN_STATE;
 @Service
 @Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService{
+
+    @Override
+    public boolean isAdmin(User user) {
+        return user != null && user.getUserRole().equals(UserRoleEnum.ADMIN.getValue());
+    }
 
     @Override
     public long userRegister(String userAccount, String userPassword, String checkPassword) {
