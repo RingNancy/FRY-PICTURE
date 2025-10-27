@@ -4,6 +4,7 @@ import com.rin.rinpicturebackend.common.PageRequest;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,6 +53,14 @@ public class PictureQueryRequest extends PageRequest implements Serializable {
      * 用户id
      */
     private Long userId;
+
+    private Integer reviewStatus;
+
+    private String reviewMessage;
+
+    private Long reviewerId;
+
+    private Date reviewTime;
 
     public static final long serialVersionUID = 1L;
 }

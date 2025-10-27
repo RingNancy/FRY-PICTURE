@@ -3,6 +3,7 @@ package com.rin.rinpicturebackend.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.rin.rinpicturebackend.model.dto.picture.PictureQueryRequest;
+import com.rin.rinpicturebackend.model.dto.picture.PictureReviewRequest;
 import com.rin.rinpicturebackend.model.dto.picture.PictureUploadRequest;
 import com.rin.rinpicturebackend.model.entity.Picture;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -22,12 +23,12 @@ public interface PictureService extends IService<Picture> {
     /**
      * 上传图片
      *
-     * @param multipartFile        文件
+     * @param inputSource        文件
      * @param pictureUploadRequest 参数
      * @param loginUser            登录用户
      * @return 图片包装类
      */
-    PictureVO uploadPicture (MultipartFile multipartFile, PictureUploadRequest pictureUploadRequest, User loginUser);
+    PictureVO uploadPicture (Object inputSource, PictureUploadRequest pictureUploadRequest, User loginUser);
 
     /**
      * 获取单张图片
@@ -47,7 +48,30 @@ public interface PictureService extends IService<Picture> {
     Page<PictureVO> getPictureVOPage(Page<Picture> picturePage, HttpServletRequest request);
 
 
+    /**
+     * 验证图片
+     *
+     * @param picture
+     */
     void validPicture(Picture picture);
+
+
+    /**
+     * 图片审核
+     *
+     * @param pictureReviewRequest
+     * @param loginUser
+     */
+    void doPictureReview(PictureReviewRequest pictureReviewRequest, User loginUser);
+
+
+    /**
+     * 文件审核参数
+     *
+     * @param picture
+     * @param loginUser
+     */
+    void fileReviewParams(Picture picture, User loginUser);
 
     /**
      * 查询条件
