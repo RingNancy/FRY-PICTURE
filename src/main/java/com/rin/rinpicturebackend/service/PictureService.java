@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.rin.rinpicturebackend.model.dto.picture.PictureQueryRequest;
 import com.rin.rinpicturebackend.model.dto.picture.PictureReviewRequest;
+import com.rin.rinpicturebackend.model.dto.picture.PictureUploadByBatchRequest;
 import com.rin.rinpicturebackend.model.dto.picture.PictureUploadRequest;
 import com.rin.rinpicturebackend.model.entity.Picture;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -29,6 +30,16 @@ public interface PictureService extends IService<Picture> {
      * @return 图片包装类
      */
     PictureVO uploadPicture (Object inputSource, PictureUploadRequest pictureUploadRequest, User loginUser);
+
+
+    /**
+     * 批量上传图片
+     *
+     * @param pictureUploadByBatchRequest 批量上传图片请求
+     * @param loginUser                   登录用户
+     * @return 批量上传图片数量
+     */
+    Integer uploadPictureByBatch(PictureUploadByBatchRequest pictureUploadByBatchRequest, User loginUser);
 
     /**
      * 获取单张图片

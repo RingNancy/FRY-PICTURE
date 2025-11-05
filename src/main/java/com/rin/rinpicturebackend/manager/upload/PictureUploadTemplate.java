@@ -39,7 +39,7 @@ public abstract class PictureUploadTemplate {
         // 2. 图片上传地址
         String uuid = RandomUtil.randomString(16);
         String originFileName = getOriginFileName(inputSource);
-        String uploadFileName = String.format("%s_%s_%s", DateUtil.formatDate(new Date()), uuid, FileUtil.getSuffix(originFileName));
+        String uploadFileName = String.format("%s_%s.%s", DateUtil.formatDate(new Date()), uuid, FileUtil.getSuffix(originFileName));
         String uploadPath = String.format("/%s/%s", uploadPathPrefix, uploadFileName);
 
         File file = null;
@@ -95,8 +95,8 @@ public abstract class PictureUploadTemplate {
     }
 
     public void deleteTempFile(File file) {
-        if (file != null) {
-            FileUtil.del(file);
+        if (file == null) {
+            return;
         }
         boolean deleteResult = file.delete();
         if (!deleteResult) {

@@ -8,6 +8,17 @@ server:
 spring:
   application:
     name: rin-picture-backend
+  # session配置
+  session:
+    store-type: redis
+    # 30 天过期
+    timeout: 2592000
+  # redis配置
+  redis:
+    host: localhost
+    database: 0
+    port: 6379
+    timeout: 5000
   #数据库配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
