@@ -2,10 +2,7 @@ package com.rin.rinpicturebackend.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.rin.rinpicturebackend.model.dto.picture.PictureQueryRequest;
-import com.rin.rinpicturebackend.model.dto.picture.PictureReviewRequest;
-import com.rin.rinpicturebackend.model.dto.picture.PictureUploadByBatchRequest;
-import com.rin.rinpicturebackend.model.dto.picture.PictureUploadRequest;
+import com.rin.rinpicturebackend.model.dto.picture.*;
 import com.rin.rinpicturebackend.model.entity.Picture;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.rin.rinpicturebackend.model.entity.User;
@@ -104,6 +101,8 @@ public interface PictureService extends IService<Picture> {
      */
     void deletePicture(long pictureId, User loginUser);
 
+
+    void editPicture(PictureEditRequest pictureEditRequest, User loginUser);
     /**
      * 查询条件
      *

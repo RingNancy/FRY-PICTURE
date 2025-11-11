@@ -11,10 +11,12 @@ import com.rin.rinpicturebackend.exception.BusinessException;
 import com.rin.rinpicturebackend.exception.ErrorCode;
 import com.rin.rinpicturebackend.exception.ThrowUtils;
 import com.rin.rinpicturebackend.model.dto.space.SpaceEditRequest;
+import com.rin.rinpicturebackend.model.dto.space.SpaceLevel;
 import com.rin.rinpicturebackend.model.dto.space.SpaceQueryRequest;
 import com.rin.rinpicturebackend.model.dto.space.SpaceUpdateRequest;
 import com.rin.rinpicturebackend.model.entity.Space;
 import com.rin.rinpicturebackend.model.entity.User;
+import com.rin.rinpicturebackend.model.enums.SpaceLevelEnum;
 import com.rin.rinpicturebackend.model.vo.SpaceVO;
 import com.rin.rinpicturebackend.service.PictureService;
 import com.rin.rinpicturebackend.service.SpaceService;
@@ -24,8 +26,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @ ClassName SpaceController
@@ -164,4 +168,19 @@ public class SpaceController {
         return ResultUtils.success(result);
     }
 
+    /**
+     * 获取空间等级
+     * @return list
+     */
+    @GetMapping("/list/level")
+    public BaseResponse<List<SpaceLevel>> listSpaceLevel() {
+        List<SpaceLevel> spaceLevelList = Arrays.stream(SpaceLevelEnum.values()) // 获取所有枚举
+                .map(spaceLevelEnum -> new SpaceLevel(
+                        spaceLevelEnum.getValue(),
+                        spaceLevelEnum.getText(),
+                        spaceLevelEnum.getMaxCount(),
+                        spaceLevelEnum.getMaxSize()))
+                .collect(Collectors.toList());
+        return ResultUtils.success(spaceLevelList);
+    }
 }
