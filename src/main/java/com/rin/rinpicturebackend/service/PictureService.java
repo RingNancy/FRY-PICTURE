@@ -75,6 +75,11 @@ public interface PictureService extends IService<Picture> {
      */
     void doPictureReview(PictureReviewRequest pictureReviewRequest, User loginUser);
 
+    /**
+     * 清理图片文件
+     * @param oldPicture
+     */
+    void clearPictureFile(Picture oldPicture);
 
     /**
      * 文件审核参数
@@ -83,6 +88,21 @@ public interface PictureService extends IService<Picture> {
      * @param loginUser
      */
     void fileReviewParams(Picture picture, User loginUser);
+
+    /**
+     *  检查图片的权限，防止意外删除，新增空间之后，如果图片属于私人空间，仅允许自己删除
+     * @param loginUser
+     * @param picture
+     */
+    void checkPictureAuth(User loginUser, Picture picture);
+
+
+    /**
+     * 删除图片
+     * @param pictureId
+     * @param loginUser
+     */
+    void deletePicture(long pictureId, User loginUser);
 
     /**
      * 查询条件

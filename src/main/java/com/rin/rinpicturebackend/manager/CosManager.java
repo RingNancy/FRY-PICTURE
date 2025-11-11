@@ -1,6 +1,7 @@
 package com.rin.rinpicturebackend.manager;
 
 import com.qcloud.cos.COSClient;
+import com.qcloud.cos.exception.CosClientException;
 import com.qcloud.cos.model.COSObject;
 import com.qcloud.cos.model.GetObjectRequest;
 import com.qcloud.cos.model.PutObjectRequest;
@@ -38,6 +39,11 @@ public class CosManager {
     public PutObjectResult putObject(String key, File file) {
         PutObjectRequest putObjectRequest = new PutObjectRequest(cosClientConfig.getBucket(), key, file);
         return cosClient.putObject(putObjectRequest);
+    }
+
+
+    public void deleteObject(String key) throws CosClientException{
+        cosClient.deleteObject(cosClientConfig.getBucket(), key);
     }
 
     /**
