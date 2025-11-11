@@ -105,6 +105,11 @@ public class Picture {
     private String reviewMessage;
 
     /**
+     * 空间id
+     */
+    private Long spaceId;
+
+    /**
      * 审核 id
      */
     private Long reviewerId;
